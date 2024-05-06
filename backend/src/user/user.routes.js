@@ -5,18 +5,22 @@ import { validarCampos } from "../middlewares/validar-campos.js";
 
 import {
     existeUsuarioById,
-    existenteEmail, existenteUsuario
+    existenteEmail, 
+    existenteUsuario,
 } from "../helpers/db-validators.js";
 
 import {
     usuariosPost,
     usuariosLogin,
-    usuariosPut
+    usuariosPut,
+    passwordPatch,
+    getUserSetting
 } from "./user.controller.js";
 import { validarUsuario } from "../middlewares/validar-jwts.js";
 
 const router = Router();
 
+router.get('/settings', getUserSetting)
 
 router.post(
     "/",
@@ -47,5 +51,15 @@ router.put(
         check("id").custom(existeUsuarioById),
         validarCampos,
     ], usuariosPut);
+
+router.patch(
+        "/:id",
+        [
+            validarUsuario,
+            check('password', 'la password es necesaria').not().isEmpty(),
+            check("id", "El id no es un formato válido de MongoDB").isMongoId(),
+            check("id").custom(existeUsuarioById),
+            validarCampos,
+        ], passwordPatch);
 
 export default router;

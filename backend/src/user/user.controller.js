@@ -64,26 +64,26 @@ export const usuariosLogin = async (req, res) => {
     }
 }
 
+export const getUserSetting = async (req, res) => {
+    try{
+        const { uid } = req.user
+
+        const userData = await User.findById(uid)
+
+        return res.status(200).json({
+            id: userData.id,
+            username: userData.usuario,
+            nombre: userData.nombre,
+            correo: userData.correo,
+        })
+    }catch(e){
+        return res.status(500).send('Something went wrong')
+    }
+}
+
 export const usuariosPut = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.user;
     const { _id, password, correo, ...resto } = req.body;
-    const { contraseña } = req.body;
-
-    if(!contraseña){
-        return res.status(400).json({
-            msg: 'Poner contraseña'
-        });
-    }
-
-    const x = await Usuario.findById(id);
-
-    const passwordValido = bcryptjs.compareSync(contraseña, x.password);
-
-    if (!passwordValido) {
-        return res.status(400).json({
-            msg: 'Contraseña incorrecta'
-        });
-    }
 
     const usuarioso = await Usuario.findByIdAndUpdate(id, resto, { new: true });
     const nombre = usuarioso.nombre;
@@ -94,4 +94,27 @@ export const usuariosPut = async (req, res) => {
         nombre_nuevo: nombre,
         usuario_nuevo: usua
     });
+}
+
+export const passwordPatch = async (req, res) => {
+    try{
+        const { uid } = req.user
+        const { password, newPassword} = req.body
+
+        const userData = await User.findById(uid, {password: 1})
+
+        const isPasswordCorrect = await bcryptjs.compare(password, userData.password)
+
+        if(!isPasswordCorrect){
+            return res.status(400).send('Invalid password. Please try again')
+        }
+
+        const encryptedPassword = await bcryptjs.hash(newPassword, 10)
+
+        await User.updateOne({_id: uid},{password: encryptedPassword})
+
+        return res.status(200).send('Password changed succesfully')
+    }catch(e){
+        return res.status(500).send('Somthing went wrong')
+    } 
 }
