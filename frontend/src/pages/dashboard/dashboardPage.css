@@ -5,8 +5,8 @@
  
 .nav-container {
     position: absolute;
-    width: 100%;
-    height: 50px;
+    width: 200px;
+    height: 100%;
     border-bottom: 2px solid rgb(41, 37, 37);
     box-shadow: 0 0 5px 0 rgb(61, 61, 61);
     box-sizing: border-box;

@@ -5,7 +5,7 @@ export const Logo = ({text}) => {
         <div className='auth-form-logo-container' style={{ textAlign: 'center' }}>
             <img src={logo} alt='Logo' style={{ width: '200px', height: 'auto' }}/>
             <br></br>
-            <span>{text}</span>
+            <span class="login__title">{text}</span>
         </div>
     )
 }

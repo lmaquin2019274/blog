@@ -25,7 +25,7 @@ const NavButton = ({ text, onClickHandler }) => {
 }
 
 export const Navbar = () => {
-    const { isLogger, logout } = useUserDetails()
+    const { isLogged, logout } = useUserDetails()
 
     const navigate = useNavigate()
 
@@ -53,7 +53,7 @@ export const Navbar = () => {
         <div className="nav-container">
             <NavLogo/>
             <div className="nav-buttons-container">
-                {!isLogger ? (
+                {!isLogged ? (
                     <NavButton text='Log in' onClickHandler={handleNavigateToAuthPage}/>
                 ) : (
                     <div>

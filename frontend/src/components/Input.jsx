@@ -4,6 +4,8 @@ export const Input = ({
     value,
     onChangeHandler,
     type,
+    placeholder,
+    className,
     showErrorMessage,
     validationMessage,
     onBlurHandler,
@@ -31,6 +33,8 @@ export const Input = ({
               onBlur={handlerInputBlur}
               rows={5}
               style={{maxWidth: '400px'}}
+              placeholder={placeholder}
+              className={className}
             />
           ) : (
             <input
@@ -38,6 +42,8 @@ export const Input = ({
               value={value}
               onChange={handleValueChange}
               onBlur={handlerInputBlur}
+              placeholder={placeholder}
+              className={className}
             />
           )
         }
