@@ -12,14 +12,15 @@ import {
     publiGet,
     publiPost,
     publiPut,
-    publiDelete
+    publiDelete,
+    findPostById
 } from "./publication.controller.js";
 
 const router = Router();
 
-router.get("/", [
-    validarJWT
-], publiGet);
+router.get("/", [], publiGet);
+
+router.get("/:id", [], findPostById)
 
 router.post(
     "/",

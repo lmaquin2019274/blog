@@ -3,7 +3,7 @@ import logo from '../../assets/logoMini.png'
 import { useUserDetails } from '../../shared/hooks'
 
 const NavLogo = () => {
-    return(
+    return (
         <div className="nav-logo-container">
             <img
                 className="nav-logo"
@@ -25,7 +25,7 @@ const NavButton = ({ text, onClickHandler }) => {
 }
 
 export const Navbar = () => {
-    const { isLogged, logout } = useUserDetails()
+    const { isLogger, logout } = useUserDetails()
 
     const navigate = useNavigate()
 
@@ -37,12 +37,12 @@ export const Navbar = () => {
         navigate('/settings')
     }
 
-    const handleNavigateToHotelsPage = () => {
-        navigate('/hotel')
+    const handleNavigateToNewPostPage = () => {
+        navigate('/newpost')
     }
 
-    const handleNavigateToRoomsPage = () => {
-        navigate('/room')
+    const handleNavigateToHomePage = () => {
+        navigate('/')
     }
 
     const handleLogout = () => {
@@ -51,14 +51,26 @@ export const Navbar = () => {
 
     return (
         <div className="nav-container">
-            <NavLogo/>
+            <div className="logo-box">
+                <NavLogo />
+                <NavButton text='One Chan' onClickHandler={handleNavigateToHomePage} />
+            </div>
             <div className="nav-buttons-container">
-                {!isLogged ? (
-                    <NavButton text='Log in' onClickHandler={handleNavigateToAuthPage}/>
-                ) : (
+                {!isLogger ? (
                     <div>
-                        <NavButton text='My account' onClickHandler={handleNavigateToSettingPage}/>
-                        <NavButton text='Log out' onClickHandler={handleLogout}/>
+                        <NavButton text='Log in' onClickHandler={handleNavigateToAuthPage} />
+                        <i className="fa-solid fa-right-to-bracket"></i>
+                    </div>
+                ) : (
+                    <div className="sidebar">
+                        <i className="fa-solid fa-square-plus"></i>
+                        <NavButton text='New Post' onClickHandler={handleNavigateToNewPostPage} />
+                        <br></br>
+                        <i className="fa-solid fa-user"></i>
+                        <NavButton text='My account' onClickHandler={handleNavigateToSettingPage} />
+                        <br></br>
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                        <NavButton text='Log out' onClickHandler={handleLogout} />
                     </div>
                 )}
             </div>

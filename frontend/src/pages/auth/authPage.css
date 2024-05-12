@@ -112,6 +112,9 @@
 }
 
 .auth-form-validation-message {
+  position: absolute;
+  margin-top: 29px;
+  margin-left: -405px;
   width: 400px;
   color: rgb(156, 2, 2);
 }

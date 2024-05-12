@@ -3,31 +3,30 @@ import { useEffect } from "react";
 import { Navbar } from "../../components/navbars/Navbar";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { Content } from "../../components/dashboard/Content";
-import {  } from "../../shared/hooks";
-
+import { usePosts } from "../../shared/hooks";
+import { useUserDetails } from "../../shared/hooks";
 
 import "./dashboardPage.css";
 
 export const DashboardPage = () => {
-  /*const { getHotels, allHotels, isFetching: isHotelsFetching } = useHotels();
-  const { getRooms, allRooms, isFetching: isRoomsFetching } = useRooms();
-  const { isLogged } = useUserDetails();
+    const { getPosts, allPosts, isFetching: isPostsFetching } = usePosts();
+    /*const { getRooms, allRooms, isFetching: isRoomsFetching } = useRooms();*/
+    const { isLogged } = useUserDetails();
 
-  useEffect(() => {
-      getHotels(isLogged);
-      getRooms(isLogged);
-  }, []);
+    useEffect(() => {
+        getPosts(isLogged);
+        /*getRooms(isLogged);*/
+    }, []);
 
-  if (isHotelsFetching || isRoomsFetching) {
-      return <LoadingSpinner />;
-  }
+    if (isPostsFetching /*|| isRoomsFetching*/) {
+        return <LoadingSpinner />;
+    }
 
-  */
 
-  return (
-      <div className="dashboard-container">
-          <Navbar />
-          <Content /*hotels={allHotels || []} getHotels={getHotels} rooms={allRooms || []} getRooms={getRooms} *//>
-      </div>
-  );
+    return (
+        <div className="dashboard-container">
+            <Navbar />
+            <Content posts={allPosts || []} getPosts={getPosts} /*rooms={allRooms || []} getRooms={getRooms} */ />
+        </div>
+    );
 };

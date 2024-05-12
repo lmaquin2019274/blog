@@ -13,6 +13,7 @@ export const Settings = () => {
         <div className="settings-container">
             <span>Settings</span>
             <UserSettings settings={userSettings} saveSettings={saveSettings}/>
+            <span>Change password</span>
             <PasswordSettings/>
         </div>
     )

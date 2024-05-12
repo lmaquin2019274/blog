@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { 
-    passwordConfirmationMessage, 
     validatePassword, 
     validatePasswordMessage} from '../../shared/validators'
 import { Input } from "../Input"
@@ -16,7 +15,7 @@ const inputs = [
     {
         field: 'newPassword',
         label: 'New Password',
-        validationMessage: passwordConfirmationMessage,
+        validationMessage: validatePasswordMessage,
         type:'password'
     },
 ]

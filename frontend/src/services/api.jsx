@@ -27,9 +27,9 @@ export const register = async (data) => {
         }
     }
 }
-export const patchChangePassword = async (userId) => {
+export const patchChangePassword = async (data) => {
     try{
-        return await apiClient.patch(`/${userId}`)
+        return await apiClient.patch('/usuarios/password', data)
     }catch(e){
         return{
             error: true,
@@ -37,9 +37,9 @@ export const patchChangePassword = async (userId) => {
         }
     }
 }
-export const putUserSettings = async (userId, data) => {
+export const putUserSettings = async (data) => {
     try{
-        return await apiClient.get(`/${userId}`, data)
+        return await apiClient.put('/usuarios/update', data)
     }catch(e){
         return{
             error: true,
@@ -47,9 +47,9 @@ export const putUserSettings = async (userId, data) => {
         }
     }
 }
-export const getUserSetting = async (userId) => {
+export const getUserSetting = async (data) => {
     try{
-        return await apiClient.get(`/${userId}`)
+        return await apiClient.post('/usuarios/settings', data)
     }catch(e){
         return{
             error: true,
@@ -57,3 +57,51 @@ export const getUserSetting = async (userId) => {
         }
     }
 }
+export const getPosts = async () => {
+    try{
+        return await apiClient.get('/publications')
+    }catch(e){
+        return{
+            error: true,
+            e
+        }
+    }
+}
+export const getPostsDetails = async (id) => {
+    try{
+        return await apiClient.get(`/publications/${id}`)
+    }catch(e){
+        return{
+            error: true,
+            e
+        }
+    }
+}
+export const newPost = async (data, token) => {
+    try{
+        const response = await apiClient.post('/publications', data, {
+            headers: {
+                'x-token': `${token}`
+            }
+        });
+        return response;
+    }catch(e){
+        return{
+            error: true,
+            e
+        }
+    }
+}
+export const newComment = async (data, token) => {
+    try {
+        const response = await apiClient.post('/comments', data, {
+            headers: {
+                'x-token': `${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+        return { error: true, e: error };
+    }
+};

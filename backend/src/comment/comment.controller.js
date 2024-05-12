@@ -17,6 +17,9 @@ export const commentPost = async (req, res) => {
     const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
     const user = await Usuario.findById(uid);
 
+    console.log('coment.controller')
+    console.log(user)
+
     if (!user) {
         return res.status(401).json({
             msg: "Usuario no existe en la base de datos",
@@ -28,7 +31,7 @@ export const commentPost = async (req, res) => {
         });
     }
 
-    const comment = new Comment({ usuario: user.usuario, publicacion, texto });
+    const comment = new Comment({ usuario: user.username, publicacion, texto });
 
     await comment.save();
     res.status(200).json({

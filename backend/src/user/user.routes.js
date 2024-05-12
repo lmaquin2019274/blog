@@ -16,49 +16,41 @@ import {
     passwordPatch,
     getUserSetting
 } from "./user.controller.js";
-import { validarUsuario } from "../middlewares/validar-jwts.js";
 
 const router = Router();
 
-router.get('/settings', getUserSetting)
+router.post('/settings', getUserSetting)
 
 router.post(
     "/",
     [
-        check("nombre", "El nombre es obligatorio").not().isEmpty(),
-        check("correo", "El correo es obligatorio").not().isEmpty(),
-        check("password", "El password debe tener más de 6 letras").isLength({ min: 6, }),
-        check("correo", "El correo debe ser un correo").isEmail(),
-        check("correo").custom(existenteEmail),
-        check("username").custom(existenteUsuario),
+        check("email", "El correo debe ser un correo").isEmail(),
+        check("email").custom(existenteEmail),
+        check("user").custom(existenteUsuario),
         validarCampos,
     ], usuariosPost);
 
 router.post(
     "/login",
     [
-        check('user', 'El usuario es necesario').not().isEmpty(),
-        check('password', 'la password es necesaria').not().isEmpty(),
         validarCampos,
     ], usuariosLogin);
 
 router.put(
-    "/:id",
+    "/update",
     [
-        validarUsuario,
         check("usuario").custom(existenteUsuario),
-        check("id", "El id no es un formato válido de MongoDB").isMongoId(),
-        check("id").custom(existeUsuarioById),
+        check("userId", "El id no es un formato válido de MongoDB").isMongoId(),
+        check("userId").custom(existeUsuarioById),
         validarCampos,
     ], usuariosPut);
 
 router.patch(
-        "/:id",
+        "/password",
         [
-            validarUsuario,
             check('password', 'la password es necesaria').not().isEmpty(),
-            check("id", "El id no es un formato válido de MongoDB").isMongoId(),
-            check("id").custom(existeUsuarioById),
+            check("userId", "El id no es un formato válido de MongoDB").isMongoId(),
+            check("userId").custom(existeUsuarioById),
             validarCampos,
         ], passwordPatch);
 

@@ -4,7 +4,10 @@ import Usuario from "../user/user.model.js"
 export const validarJWT = async (req, res, next) => {
   const token = req.header("x-token");
 
+  console.log(token)
+
   if (!token) {
+    console.log("No hay token en la petición")
     return res.status(401).json({
       msg: "No hay token en la petición",
     });
@@ -12,8 +15,12 @@ export const validarJWT = async (req, res, next) => {
 
   try {
     const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+
+    console.log(uid)
     const usuario = await Usuario.findById(uid);
+    console.log(usuario)
     if (!usuario) {
+      console.log("Usuario no existe en la base de datos")
       return res.status(401).json({
         msg: "Usuario no existe en la base de datos",
       });

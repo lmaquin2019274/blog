@@ -10,11 +10,11 @@ export const publiGet = async (req, res) => {
     try {
         const total = await Publication.countDocuments({ estado: true });
 
-        const publi = await Publication.find({ estado: true })
+        const posts = await Publication.find({ estado: true })
             .skip(Number(desde) || 0)
             .limit(Number(limite) || 10)
             .lean();
-        for (const publication of publi) {
+        for (const publication of posts) {
             const id = publication._id
             const comments = await Comment.find({ publicacion: id, estado: true }).lean();
             publication.comentarios = comments;
@@ -23,17 +23,41 @@ export const publiGet = async (req, res) => {
 
         res.status(200).json({
             total,
-            publi
+            posts
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
+export const findPostById = async (req, res) => {
+    const { id } = req.params;
+    console.log(id)
+
+    try {
+        const post = await Publication.findById(id).lean();
+
+        if (!post) {
+            return res.status(404).json({ message: 'Publicación no encontrada' });
+        }
+
+        const comments = await Comment.find({ publicacion: id, estado: true }).lean();
+        post.comentarios = comments;
+        post.comentariosCount = comments.length;
+
+        res.status(200).json({ post });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 export const publiPost = async (req, res) => {
     const { titulo, categoria, texto } = req.body;
 
     const token = req.header("x-token");
+
+    console.log(token)
 
     if (!token) {
         return res.status(401).json({
@@ -43,6 +67,8 @@ export const publiPost = async (req, res) => {
 
     const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
     const user = await Usuario.findById(uid);
+
+    console.log(user)
 
     if (!user) {
         return res.status(401).json({
@@ -55,11 +81,11 @@ export const publiPost = async (req, res) => {
         });
     }
 
-    const publi = new Publication({ usuario: user.usuario, titulo, categoria, texto });
+    const posts = new Publication({ usuario: user.username, titulo, categoria, texto });
 
-    await publi.save();
+    await posts.save();
     res.status(200).json({
-        publi
+        posts
     });
 }
 
@@ -67,21 +93,21 @@ export const publiPut = async (req, res) => {
     const { id } = req.params;
     const { _id, titulo, categoria, usuario, ...resto } = req.body;
 
-    const publi = await Publication.findByIdAndUpdate(id, resto, { new: true });
+    const posts = await Publication.findByIdAndUpdate(id, resto, { new: true });
 
     res.status(200).json({
         msg: 'Publicación actualizada',
-        publi
+        posts
     })
 }
 
 export const publiDelete = async (req, res) => {
     const { id } = req.params;
 
-    const publi = await Publication.findByIdAndUpdate(id, { estado: false });
+    const posts = await Publication.findByIdAndUpdate(id, { estado: false });
 
     res.status(200).json({
         msg: 'Publicación eliminada',
-        publi
+        posts
     })
 }

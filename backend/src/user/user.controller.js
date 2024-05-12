@@ -4,77 +4,81 @@ import Usuario from "./user.model.js";
 import { generarJWT } from "../helpers/generar-jwt.js"
 
 export const usuariosPost = async (req, res) => {
-    const { nombre, username, correo, password } = req.body;
-    const usuario = new Usuario({ nombre, usuario: username, correo, password });
-
-    const salt = bcryptjs.genSaltSync();
-    usuario.password = bcryptjs.hashSync(password, salt);
-
-    await usuario.save();
-    res.status(200).json({
-        usuario
-    });
-}
+    try {
+      const { username, password, email } = req.body;
+  
+      const salt = bcryptjs.genSaltSync();
+      const encryptedPassword = bcryptjs.hashSync(password, salt);
+  
+      const user = await Usuario.create({
+        username,
+        email: email.toLowerCase(),
+        password: encryptedPassword,
+      });
+  
+      return res.status(200).json({
+        msg: "user has been added to database",
+        userDetails: {
+          user: user.username,
+          email: user.email,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      return res.status(500).send("No se pudo registrar el usuario");
+    }
+  };
 
 export const usuariosLogin = async (req, res) => {
-    const { user, password } = req.body;
-
+    const { email, password } = req.body;
+  
     try {
-        const usuario = await Usuario.findOne({ correo: user });
-        const usuario2 = await Usuario.findOne({ usuario: user });
-
-        if (!usuario && !usuario2) {
-            return res.status(400).json({
-                msg: 'Usuario no encontrado'
-            });
-        }
-
-        if ((!usuario || !usuario.estado) && (!usuario2 || !usuario2.estado)) {
-            return res.status(400).json({
-                msg: 'Usuario borrado de la base de datos'
-            })
-        }
-
-        let passwordValido = false;
-        if (usuario) {
-            passwordValido = bcryptjs.compareSync(password, usuario.password);
-        } else if (usuario2) {
-            passwordValido = bcryptjs.compareSync(password, usuario2.password);
-        }
-
-        if (!passwordValido) {
-            return res.status(400).json({
-                msg: 'Contraseña incorrecta'
-            });
-        }
-
-        const token = await generarJWT(usuario ? usuario.id : usuario2.id);
-
+      //verificar si el email existe:
+      const user = await Usuario.findOne({ email: email.toLowerCase() });
+  
+      if(user && (await bcryptjs.compare(password, user.password))){
+        const token = await generarJWT(user.id, user.email)
+  
         res.status(200).json({
-            msg_1: 'Inicio de sesión exitoso',
-            msg_2: 'Bienvenido ' + (usuario ? usuario.nombre : usuario2.nombre),
-            msg_3: 'Este su token => ' + token,
+          msg: "Login Ok!!!",
+          userDetails: {
+            username: user.username,
+            token: token,
+            id: user.id
+          },
         });
-
+      }
+  
+      if (!user) {
+        return res
+          .status(400)
+          .send(`Wrong credentials, ${email} doesn't exists en database`);
+      }
+  
+      // verificar la contraseña
+      const validPassword = bcryptjs.compareSync(password, user.password);
+      if (!validPassword) {
+        return res.status(400).send("wrong password");
+      }
+     
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            msg: 'Error inesperado'
-        })
+      res.status(500).send("Comuniquese con el administrador");
     }
-}
+  };
 
 export const getUserSetting = async (req, res) => {
     try{
-        const { uid } = req.user
+        const { userId } = req.body
+        console.log('userId:' + userId)
 
-        const userData = await User.findById(uid)
+        const userData = await Usuario.findById(userId)
+
+        console.log('user: ' +  userData)
 
         return res.status(200).json({
             id: userData.id,
-            username: userData.usuario,
-            nombre: userData.nombre,
-            correo: userData.correo,
+            username: userData.username,
+            email: userData.email,
         })
     }catch(e){
         return res.status(500).send('Something went wrong')
@@ -82,26 +86,25 @@ export const getUserSetting = async (req, res) => {
 }
 
 export const usuariosPut = async (req, res) => {
-    const { id } = req.user;
-    const { _id, password, correo, ...resto } = req.body;
+  const { userId, username, email } = req.body;
 
-    const usuarioso = await Usuario.findByIdAndUpdate(id, resto, { new: true });
-    const nombre = usuarioso.nombre;
-    const usua = usuarioso.usuario;
+  const actualizaciones = { username: username, email: email };
+  const usuarioActualizado = await Usuario.findByIdAndUpdate(userId, actualizaciones, { new: true });
 
-    res.status(200).json({
-        msg: 'Tu usuario ha sido actualizado',
-        nombre_nuevo: nombre,
-        usuario_nuevo: usua
-    });
+  console.log(usuarioActualizado)
+
+  res.status(200).json({
+      msg: 'Tu usuario ha sido actualizado',
+      usuario_nuevo: usuarioActualizado.usuario
+  });
 }
+
 
 export const passwordPatch = async (req, res) => {
     try{
-        const { uid } = req.user
-        const { password, newPassword} = req.body
+        const { userId, password, newPassword} = req.body
 
-        const userData = await User.findById(uid, {password: 1})
+        const userData = await Usuario.findById(userId, {password: 1})
 
         const isPasswordCorrect = await bcryptjs.compare(password, userData.password)
 
@@ -111,7 +114,7 @@ export const passwordPatch = async (req, res) => {
 
         const encryptedPassword = await bcryptjs.hash(newPassword, 10)
 
-        await User.updateOne({_id: uid},{password: encryptedPassword})
+        await Usuario.updateOne({_id: userId},{password: encryptedPassword})
 
         return res.status(200).send('Password changed succesfully')
     }catch(e){
