@@ -8,4 +8,44 @@
   "password": "$2a$10$CbTFHXP42iDGCmWqK39uVO4x8zC/51.BdH6qs0Wbp/kHnYi0EJq9W",
   "estado": true,
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663fbba1f7f3df2679cc0428"
+  },
+  "username": "luccianito",
+  "email": "luciano@email.com",
+  "password": "$2a$10$iv6/B1pcNStBRvkam4H.7.AXjB98s37To.EQtF7Ns4T0p1x6Ei4Fe",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66414ba70479c53f70f18f91"
+  },
+  "username": "taller",
+  "email": "taller@email.com",
+  "password": "$2a$10$b6.2zvZgFiKSckz8MnR6rOh4NgUdRh/CcwtsT9g1t/qspM1yDnMFC",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6641587c0479c53f70f18fe3"
+  },
+  "username": "tecnologia",
+  "email": "tecnologia@email.com",
+  "password": "$2a$10$Zy0VvMpefyWthd6WP2Ydf.kq9qR8bFcHx5S9YI3AfVAyLmJz/cQ9.",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6641594b0479c53f70f19018"
+  },
+  "username": "practica",
+  "email": "practica@email.com",
+  "password": "$2a$10$rsH0Um3P9AHehslVYxqVvu5MKNwWED1EOgqgWzGEnH1t1o5kqbNdS",
+  "estado": true,
+  "__v": 0
 }]

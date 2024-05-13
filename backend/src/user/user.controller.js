@@ -15,12 +15,15 @@ export const usuariosPost = async (req, res) => {
         email: email.toLowerCase(),
         password: encryptedPassword,
       });
+
+      const token = await generarJWT(user.id, user.email)
   
       return res.status(200).json({
         msg: "user has been added to database",
         userDetails: {
           user: user.username,
           email: user.email,
+          token: token,
         },
       });
     } catch (e) {

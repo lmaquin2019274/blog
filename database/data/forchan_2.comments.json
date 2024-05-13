@@ -17,4 +17,64 @@
   "texto": "menti, no es tan buena la publicacion",
   "estado": true,
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6640f724ef244a46135eec4f"
+  },
+  "usuario": "lucciano",
+  "publicacion": "65e2335b554923802cd8bfc2",
+  "texto": "hola que tal",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6640f7f1ef244a46135eec61"
+  },
+  "usuario": "lucciano",
+  "publicacion": "65e2335b554923802cd8bfc2",
+  "texto": "deberian inventar el queso rojo",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6640fb4e779aac713c6f9e9c"
+  },
+  "usuario": "lucciano",
+  "publicacion": "65e2335b554923802cd8bfc2",
+  "texto": "opino lo mismo",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66410a65130fbfc3718576ba"
+  },
+  "usuario": "luccianito",
+  "publicacion": "65e2335b554923802cd8bfc2",
+  "texto": "si",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664115250a5d9788f5f9363c"
+  },
+  "usuario": "luccianito",
+  "publicacion": "65e2335b554923802cd8bfc2",
+  "texto": "hola",
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664117f5800597dc64aa46e9"
+  },
+  "usuario": "luccianito",
+  "publicacion": "66411682800597dc64aa46c4",
+  "texto": "esta bueno",
+  "estado": true,
+  "__v": 0
 }]

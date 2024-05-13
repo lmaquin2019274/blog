@@ -9,4 +9,88 @@
   "comentarios": [],
   "estado": true,
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66411682800597dc64aa46c4"
+  },
+  "usuario": "luccianito",
+  "titulo": "Post de luciano",
+  "categoria": "just talking",
+  "texto": "Hola este es mi primer post y quiero preguntar que tal su día",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66414c1a0479c53f70f18faa"
+  },
+  "usuario": "taller",
+  "titulo": "javaScript",
+  "categoria": "learning",
+  "texto": "JavaScript es un lenguaje de programación de alto nivel, interpretado por los navegadores web para hacer que las páginas web sean interactivas y dinámicas. Es fundamental en el desarrollo web, permitiendo la manipulación del contenido HTML y CSS, así como la creación de aplicaciones web complejas y modernas. JavaScript también se utiliza en el desarrollo de aplicaciones móviles, servidores y en la creación de interfaces de usuario para aplicaciones de escritorio. Es conocido por su flexibilidad, ya que es tanto un lenguaje de programación del lado del cliente como del servidor.",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664155230479c53f70f18fc7"
+  },
+  "usuario": "taller",
+  "titulo": "MongoDB",
+  "categoria": "learning",
+  "texto": "MongoDB es una base de datos NoSQL, orientada a documentos, que ofrece una alta escalabilidad y flexibilidad para el almacenamiento y la manipulación de datos. Utiliza un formato de datos similar a JSON, lo que lo hace fácil de entender y trabajar para los desarrolladores. MongoDB es especialmente adecuado para aplicaciones que manejan grandes volúmenes de datos y requieren un acceso rápido a la información. Se destaca por su capacidad para manejar datos semi-estructurados y su capacidad de distribución en clústeres para garantizar la disponibilidad y la tolerancia a fallos.",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664158df0479c53f70f19000"
+  },
+  "usuario": "tecnologia",
+  "titulo": "Node js",
+  "categoria": "learning",
+  "texto": "Node.js es un entorno de ejecución de JavaScript del lado del servidor, basado en el motor V8 de Google Chrome. Permite a los desarrolladores crear aplicaciones web y de red altamente escalables y de alto rendimiento. Node.js utiliza un modelo de entrada/salida sin bloqueo y basado en eventos, lo que lo hace ideal para aplicaciones en tiempo real que requieren una gran cantidad de conexiones concurrentes. Es ampliamente utilizado en el desarrollo de servidores web, API RESTful, aplicaciones de mensajería instantánea, streaming de datos y otras aplicaciones de red. Node.js tiene una gran cantidad de bibliotecas y un ecosistema activo que lo convierten en una opción popular para el desarrollo backend.",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664159120479c53f70f19004"
+  },
+  "usuario": "tecnologia",
+  "titulo": "React",
+  "categoria": "learning",
+  "texto": "React es una biblioteca de JavaScript de código abierto desarrollada por Facebook que se utiliza para construir interfaces de usuario (UI) interactivas y reactivas. Se centra en la creación de componentes reutilizables que representan diferentes partes de la interfaz de usuario de una aplicación. React utiliza un enfoque basado en componentes y utiliza un lenguaje de marcado llamado JSX que permite la mezcla de HTML y JavaScript de manera intuitiva. Además, React utiliza un modelo de programación declarativo que hace que la creación y el mantenimiento de interfaces de usuario sean más sencillos y menos propensos a errores. React es muy popular en el desarrollo web, especialmente en la creación de aplicaciones de una sola página (SPA), aplicaciones móviles con React Native, y en aplicaciones de escritorio con React Desktop.",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6641598d0479c53f70f19035"
+  },
+  "usuario": "practica",
+  "titulo": "Express",
+  "categoria": "learning",
+  "texto": "Express es un marco de aplicación web de Node.js minimalista y flexible que proporciona una capa de abstracción sobre el servidor HTTP de Node.js, facilitando la creación de aplicaciones web y APIs de manera rápida y sencilla. Está diseñado para ser minimalista y no restrictivo, lo que significa que proporciona solo las funcionalidades esenciales para construir aplicaciones web, pero permite una gran flexibilidad para extender y personalizar según las necesidades del desarrollador. Express se destaca por su enfoque basado en middleware, que permite el uso de funciones modulares para manejar solicitudes HTTP, como enrutamiento, procesamiento de solicitudes, y manipulación de respuestas. Es ampliamente utilizado en el desarrollo de aplicaciones web y APIs en el ecosistema de Node.js.",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664159ec0479c53f70f19039"
+  },
+  "usuario": "practica",
+  "titulo": "Vite",
+  "categoria": "learning",
+  "texto": "Vite utiliza la tecnología de esbundling (empaquetado) en tiempo real para proporcionar una experiencia de desarrollo rápida, eliminando la necesidad de generar paquetes de producción anticipadamente. Esto significa que los cambios se reflejan instantáneamente en el navegador durante el desarrollo, lo que acelera significativamente el ciclo de desarrollo. Además, Vite es compatible con React, permitiendo una integración perfecta con herramientas de desarrollo como React Developer Tools y React Fast Refresh para una experiencia de desarrollo aún más fluida.",
+  "comentarios": [],
+  "estado": true,
+  "__v": 0
 }]

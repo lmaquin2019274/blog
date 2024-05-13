@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Input } from '../Input'
+import { Textarea } from '../Textarea'
 import {
     validateDescription,
     descriptionValidateMessage,
@@ -81,7 +82,7 @@ export const NewPost = () => {
         <div className='new-post-container'>
             <span className='new-post-title'>New Post</span>
             <form className='new-post-form'>
-                <div className='input-box'>
+                <div className='post-input-box'>
                     <Input
                         field='titulo'
                         placeholder='Title'
@@ -95,7 +96,7 @@ export const NewPost = () => {
                     />
                     <i class="fa-solid fa-heading"></i>
                 </div>
-                <div className='input-box'>
+                <div className='post-input-box'>
                     <Input
                         field='categoria'
                         placeholder='Category'
@@ -109,8 +110,8 @@ export const NewPost = () => {
                     />
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
-                <div className='input-box'>
-                    <Input
+                <div className='post-input-text-box'>
+                    <Textarea
                         field='texto'
                         placeholder='Body text'
                         className='post-text'
