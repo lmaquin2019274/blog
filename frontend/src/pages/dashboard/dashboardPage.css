@@ -218,6 +218,7 @@
     padding: 20px;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.7);
+    width: 800px;
 }
 
 .post-description-text {
@@ -305,7 +306,7 @@
     padding: 10px;
     border: solid 2px #b5b3b3;
     border-radius: 10px;
-    width: 100%;
+    width: 147%;
     outline: none;
 }
 
@@ -313,7 +314,8 @@
     margin-left: 10px;
     position: absolute;
     margin-top: -41px;
-    margin-left: 450px;
+    margin-left: 645px;
+    width: 60px;
 }
 
 .spinner-container {
@@ -380,9 +382,15 @@
     margin-right: 20px;
 }
 
+.post-input-text-box {
+    position: relative;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
 .post-text {
     height: 200px;
-    vertical-align: top;
+    width: 00px;
 }
 
 .post-input,
@@ -405,11 +413,18 @@
     color: #4CAF50;
 }
 
-.post-input-box i.fa-solid,
-.post-input-text-box i.fa-solid {
+.post-input-box i.fa-solid {
     position: absolute;
     right: 10px;
     top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.post-input-text-box i.fa-solid {
+    position: absolute;
+    right: 10px;
+    top: 12%;
     transform: translateY(-50%);
     color: #aaa;
 }
