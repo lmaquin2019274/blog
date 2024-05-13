@@ -2,23 +2,22 @@ import { Router } from "express";
 import { check } from "express-validator";
 
 import { validarCampos } from "../middlewares/validar-campos.js";
-import { validarJWT, validarUsuario } from "../middlewares/validar-jwts.js";
-
-import {
-    existePubliById
-} from "../helpers/db-validators.js";
+import { validarJWT } from "../middlewares/validar-jwts.js";
 
 import {
     publiGet,
     publiPost,
     publiPut,
     publiDelete,
-    findPostById
+    findPostById,
+    publiGetUser
 } from "./publication.controller.js";
 
 const router = Router();
 
 router.get("/", [], publiGet);
+
+router.post("/user", [], publiGetUser);
 
 router.get("/:id", [], findPostById)
 
@@ -35,14 +34,12 @@ router.post(
 router.put(
     "/:id",
     [
-        validarUsuario,
         validarCampos,
     ], publiPut);
 
 router.delete(
     "/:id",
     [
-        validarUsuario,
         validarCampos,
     ], publiDelete);
 

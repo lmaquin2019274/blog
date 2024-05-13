@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { PostDescription } from "./PostDescription";
 import { MessageDescription } from "./MessageDescription"
-import { usePostDetails, useNewComment } from "../../shared/hooks";
+import { usePostDetails, useNewComment, useUserDetails } from "../../shared/hooks";
 import { LoadingSpinner } from "../LoadingSpinner";
 import { Input } from "../Input";
 import {
@@ -64,6 +65,12 @@ export const PostView = ({ getPosts }) => {
 
     const handleComment = (event) => {
         event.preventDefault();
+
+        const { isLogger } = useUserDetails()
+
+        if(!isLogger){
+            toast.error('Primero debe loggearse');
+        }
 
         comment(id, formState.comment.value);
         setFormState((prevState) => ({

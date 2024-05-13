@@ -30,9 +30,37 @@ export const publiGet = async (req, res) => {
     }
 };
 
+export const publiGetUser = async (req, res) => {
+    const { limite, desde } = req.query
+
+    try {
+        const { user } = req.body
+        console.log('publi: '+user)
+        const total = await Publication.countDocuments({ estado: true, usuario: user });
+
+        const posts = await Publication.find({ estado: true, usuario: user })
+            .skip(Number(desde) || 0)
+            .limit(Number(limite) || 10)
+            .lean();
+        for (const publication of posts) {
+            const id = publication._id
+            const comments = await Comment.find({ publicacion: id, estado: true }).lean();
+            publication.comentarios = comments;
+            publication.comentariosCount = comments.length;
+        }
+
+        res.status(200).json({
+            total,
+            user,
+            posts
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export const findPostById = async (req, res) => {
     const { id } = req.params;
-    console.log(id)
 
     try {
         const post = await Publication.findById(id).lean();
@@ -57,7 +85,6 @@ export const publiPost = async (req, res) => {
 
     const token = req.header("x-token");
 
-    console.log(token)
 
     if (!token) {
         return res.status(401).json({
@@ -68,7 +95,6 @@ export const publiPost = async (req, res) => {
     const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
     const user = await Usuario.findById(uid);
 
-    console.log(user)
 
     if (!user) {
         return res.status(401).json({

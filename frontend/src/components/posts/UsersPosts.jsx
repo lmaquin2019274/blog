@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { PostCard } from "./PostCard";
+import { UserPostCard } from "./UserPostCard";
 
-export const Posts = ({posts}) => {
+
+export const UsersPosts = ({posts}) => {
     const navigate  = useNavigate()
 
     const handleNavigateToPost = (id) => {
@@ -11,9 +12,9 @@ export const Posts = ({posts}) => {
 
     return (
         <div className="posts-container">
-          <span className="title-posts">Posts:</span>
+          <span className="title-posts">Tus posts:</span>
           {Array.isArray(posts.posts) && posts.posts.map((p) => (
-            <PostCard
+            <UserPostCard
               key={p.id}
               _id={p._id}
               usuario={p.usuario}

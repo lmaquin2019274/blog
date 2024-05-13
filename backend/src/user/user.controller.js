@@ -72,11 +72,10 @@ export const usuariosLogin = async (req, res) => {
 export const getUserSetting = async (req, res) => {
     try{
         const { userId } = req.body
-        console.log('userId:' + userId)
+
+        console.log(userId)
 
         const userData = await Usuario.findById(userId)
-
-        console.log('user: ' +  userData)
 
         return res.status(200).json({
             id: userData.id,

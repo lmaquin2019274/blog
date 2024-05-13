@@ -1,20 +1,37 @@
+import { useEffect } from "react";
 import { UserSettings } from "../user/UserSettings";
-import { useUserSettings } from "../../shared/hooks";
+import { useUserSettings, useUserPosts, useUserDetails } from "../../shared/hooks";
 import { LoadingSpinner } from "../LoadingSpinner";
 import { PasswordSettings } from "./PasswordSettings";
+import { UsersPosts } from "../posts/UsersPosts"
 
 export const Settings = () => {
-    const {userSettings, isFetching, saveSettings} = useUserSettings()
-    if(isFetching){
-        return <LoadingSpinner/>
+
+    const { getUserPosts, allUserPosts, isFetching: isPostsFetching } = useUserPosts();
+    const { userSettings, isFetching, saveSettings } = useUserSettings()
+    const { isLogged } = useUserDetails();
+
+    useEffect(() => {
+        getUserPosts(isLogged);
+    }, []);
+
+    if (isFetching || isPostsFetching) {
+        return <LoadingSpinner />
     }
 
-    return(
-        <div className="settings-container">
-            <span>Settings</span>
-            <UserSettings settings={userSettings} saveSettings={saveSettings}/>
-            <span>Change password</span>
-            <PasswordSettings/>
+    return (
+        <div>
+            <div className="settings-container">
+                <div>
+                    <span>Settings</span>
+                    <UserSettings settings={userSettings} saveSettings={saveSettings} />
+                </div>
+                <div>
+                    <span>Change password</span>
+                    <PasswordSettings />
+                </div>
+            </div>
+            <UsersPosts posts={allUserPosts || []} />
         </div>
     )
 }

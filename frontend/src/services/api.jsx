@@ -67,9 +67,30 @@ export const getPosts = async () => {
         }
     }
 }
+export const getPostsUser = async (data) => {
+    console.log('api: '+data.user)
+    try{
+        return await apiClient.post('/publications/user', data)
+    }catch(e){
+        return{
+            error: true,
+            e
+        }
+    }
+}
 export const getPostsDetails = async (id) => {
     try{
         return await apiClient.get(`/publications/${id}`)
+    }catch(e){
+        return{
+            error: true,
+            e
+        }
+    }
+}
+export const deletePost = async (id) => {
+    try{
+        return await apiClient.delete(`/publications/${id}`)
     }catch(e){
         return{
             error: true,

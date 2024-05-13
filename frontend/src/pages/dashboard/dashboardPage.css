@@ -3,6 +3,14 @@
     height: 100%;
 }
 
+.title-posts{
+    padding-top: 20px;
+    padding-left: 10%;
+    font-weight: 600;
+    font-size: 50px;
+    margin-bottom: -50px;
+}
+
 .nav-container {
     position: fixed;
     width: 200px;
@@ -136,7 +144,11 @@
 .settings-container {
     font-size: 24px;
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    justify-items: center;
 }
 
 .settings-form {
@@ -144,10 +156,53 @@
     flex-direction: column;
     margin-top: 20px;
     margin-bottom: 10px;
-    box-shadow: 0 0 5px 0 lightgrey;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
     width: 400px;
     padding: 10px;
     font-size: 16px;
+}
+
+.buttons-box{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    top: 0;
+    margin-bottom: -50px;
+    margin-top: 30px;
+}
+
+.buttons-box i{
+    margin-left: 10px;
+}
+
+.user-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-post .post-card{
+    margin-left: 0;
+}
+
+.buttons-box button{
+    margin-top: -10px;
+    width: 300px;
+}
+
+.btn-editar:hover{
+    background-color: #ffc800;
+    border: #b89600;
+    color: #fff;
+}
+
+.btn-eliminar:hover{
+    background-color: #e60a0a;
+    border: #9a0909;
+    color: #fff;
 }
 
 .settings-form button {
